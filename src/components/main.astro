@@ -1,10 +1,22 @@
 ---
-// Hier oben könntest du Logik einbauen, im Moment lassen wir es leer
+// 1. Astro-Bildkomponente importieren
+import { Image } from 'astro:assets';
+
+// 2. Dein Bild importieren
+import husqRefsheet from '../assets/Refsheet - husq.png';
 ---
 
 <div class="welcome-box">
   <h1>Hallo auf Husqs Seite! 👋</h1>
-  <p>Diese Komponente wurde erfolgreich geladen und ist ultraschnell.</p>
+  <p>Hallo zusammen !</p>
+  
+  <!-- 3. Das Bild wird hier direkt unter dem Text eingefügt -->
+  <div class="image-wrapper">
+    <Image 
+      src={husqRefsheet} 
+      alt="Husq Reference Sheet" 
+    />
+  </div>
 </div>
 
 <style>
@@ -24,5 +36,19 @@
   h1 {
     color: #cba6f7;
     margin-bottom: 0.5rem;
+  }
+
+  /* Neues CSS für das Bild, damit es perfekt in die Box passt */
+  .image-wrapper {
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #cba6f7;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 </style>
