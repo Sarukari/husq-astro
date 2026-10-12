@@ -4,17 +4,27 @@ import { Image } from 'astro:assets';
 
 // 2. Dein Bild importieren
 import husqRefsheet from '../assets/Refsheet - husq.png';
+import pic1 from '../assets/pic1.jpg';
+import pic2 from '../assets/pic2.png';
 ---
 
 <div class="welcome-box">
-  <h1>Hallo auf Husqs Seite! 👋</h1>
-  <p>Hallo zusammen !</p>
+  <h1>Hallo auf meiner Seite! 👋</h1>
+  <p>Mein Name ist Husq und ich bin seit mittlerweile zwei Jahrzehnten Teil der Furry-Community in Deutschland.</p>
   
   <!-- 3. Das Bild wird hier direkt unter dem Text eingefügt -->
   <div class="image-wrapper">
     <Image 
       src={husqRefsheet} 
       alt="Husq Reference Sheet" 
+    />
+        <Image 
+      src={pic1} 
+      alt="pic 1" 
+    />
+        <Image 
+      src={pic2} 
+      alt="pic 2" 
     />
   </div>
 </div>
