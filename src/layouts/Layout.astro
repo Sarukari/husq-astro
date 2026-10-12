@@ -1,9 +1,11 @@
 ---
 import '../styles/global.css';
+import Navigation from '../components/Navigation.astro'; // 1. Navigation importieren
+import Footer from '../components/Footer.astro'; // 2. Footer importieren
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="de" class="h-full"> <!-- h-full hier sorgt für die korrekte Höhe -->
 	<head>
 		<meta charset="utf-8" />
 		<meta name="robots" content="noindex, nofollow" />
@@ -13,7 +15,19 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
-	<body class="m-0 w-full h-full bg-slate-950 text-white">
-		<slot />
+	<!-- flex & flex-col sorgen zusammen mit min-h-screen dafür, dass der Footer immer unten bleibt -->
+	<body class="m-0 w-full min-h-screen bg-slate-950 text-white flex flex-col justify-between">
+		
+		<!-- 3. Navigation ganz oben einfügen -->
+		<Navigation />
+
+		<!-- Hauptinhalt wächst automatisch -->
+		<main class="flex-grow w-full">
+			<slot />
+		</main>
+
+		<!-- 4. Footer ganz unten einfügen -->
+		<Footer />
+		
 	</body>
 </html>

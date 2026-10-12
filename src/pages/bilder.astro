@@ -1,0 +1,153 @@
+---
+// src/pages/bilder.astro
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Deine Bilder importieren
+import husqRefsheet from '../assets/Refsheet - husq.png';
+import pic1 from '../assets/pic1.jpg';
+import pic2 from '../assets/pic2.png';
+import pic3 from '../assets/pic4.png';
+import pic4 from '../assets/pic3.png';
+
+const slides = [
+  { src: husqRefsheet, alt: "Bilder", title: "Husq Refsheet"},
+  { src: pic1, alt: "Bilder", title: "ZELDA"},
+  { src: pic2, alt: "Bilder", title: "Werehusq"},
+  { src: pic3, alt: "Bilder", title: "Snow"},
+  { src: pic4, alt: "Bilder", title: "In the green"},
+];
+---
+
+<Layout>
+  <div class="max-w-5xl mx-auto px-4 py-12 md:py-20 relative">
+    
+    <!-- Magischer Neon-Glow im Hintergrund -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <!-- Titel -->
+    <div class="relative z-10 mb-10 text-center">
+      <h1 class="text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+        Bilder
+      </h1>
+      <p class="text-slate-400">Einige impressionen meiner Sona</p>
+    </div>
+
+    <!-- Das Slideshow-Gehäuse -->
+    <div class="relative z-10 bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] group/container">
+      
+      <!-- Container für die Slides (Nutzt object-contain gegen Verzerrung) -->
+      <div class="relative aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden bg-slate-950/60 backdrop-blur-sm">
+        {slides.map((slide, index) => (
+          <div 
+            class={`slide absolute inset-0 w-full h-full transition-all duration-700 ease-in-out opacity-0 pointer-events-none ${index === 0 ? 'active opacity-100 pointer-events-auto' : ''}`}
+            data-index={index}
+          >
+            <!-- Das Bild behält jetzt seine originale Proportionalität -->
+            <Image 
+              src={slide.src} 
+              alt={slide.alt} 
+              class="w-full h-full object-contain" 
+            />
+            
+            <!-- Schickes, abdunkelndes Overlay für die Schrift -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none"></div>
+            
+            <!-- Text-Inhalte auf dem Bild -->
+            <div class="absolute bottom-8 left-8 right-8 md:bottom-12 md:left-12 text-left pointer-events-none">
+              <span class="px-3 py-1 bg-purple-500/20 backdrop-blur-md border border-purple-500/30 text-purple-300 text-xs font-semibold tracking-wider uppercase rounded-full">
+                {slide.tag}
+              </span>
+              <h2 class="text-2xl md:text-4xl font-black text-white mt-3 tracking-tight">
+                {slide.title}
+              </h2>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigations-Pfeile -->
+      <button 
+        id="prev-btn" 
+        class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-slate-950/60 backdrop-blur-md border border-slate-800 text-white md:opacity-0 group-hover/container:opacity-100 hover:bg-purple-600 hover:border-purple-500 transition-all duration-300"
+        aria-label="Vorheriges Bild"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+      </button>
+      
+      <button 
+        id="next-btn" 
+        class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-slate-950/60 backdrop-blur-md border border-slate-800 text-white md:opacity-0 group-hover/container:opacity-100 hover:bg-purple-600 hover:border-purple-500 transition-all duration-300"
+        aria-label="Nächstes Bild"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </button>
+
+      <!-- Punkte-Indikatoren ganz unten -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {slides.map((_, index) => (
+          <button 
+            class={`dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-slate-600 ${index === 0 ? 'bg-purple-500 w-6' : ''}`}
+            data-index={index}
+            aria-label={`Gehe zu Bild ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  function setupSlideshow() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    let currentIndex = 0;
+
+    // TypeScript-Typ 'number' hinzugefügt
+    function showSlide(index: number) {
+      if (index >= slides.length) currentIndex = 0;
+      else if (index < 0) currentIndex = slides.length - 1;
+      else currentIndex = index;
+
+      // Slides umschalten
+      slides.forEach((slide, i: number) => {
+        if (i === currentIndex) {
+          slide.classList.add('opacity-100', 'pointer-events-auto');
+          slide.classList.remove('opacity-0', 'pointer-events-none');
+        } else {
+          slide.classList.remove('opacity-100', 'pointer-events-auto');
+          slide.classList.add('opacity-0', 'pointer-events-none');
+        }
+      });
+
+      // Punkte anpassen
+      dots.forEach((dot, i: number) => {
+        if (i === currentIndex) {
+          dot.classList.add('bg-purple-500', 'w-6');
+          dot.classList.remove('bg-slate-600');
+        } else {
+          dot.classList.remove('bg-purple-500', 'w-6');
+          dot.classList.add('bg-slate-600');
+        }
+      });
+    }
+
+    nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+    prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+        showSlide(index);
+      });
+    });
+  }
+
+  // Initialisiert die Slideshow beim ersten Laden und nach jedem Astro-Seitenwechsel
+  setupSlideshow();
+  document.addEventListener('astro:after-swap', setupSlideshow);
+</script>

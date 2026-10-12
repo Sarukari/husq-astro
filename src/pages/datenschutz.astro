@@ -1,0 +1,53 @@
+---
+// src/pages/datenschutz.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div class="max-w-3xl mx-auto px-4 py-12 text-slate-300 leading-relaxed">
+    <h1 class="text-3xl font-bold text-white mb-6">Datenschutzerklärung</h1>
+    
+    <p class="mb-6">
+      Der Schutz Ihrer persönlichen Daten ist mir ein wichtiges Anliegen. Da diese Webseite ein 
+      <strong class="text-white"> rein privates Projekt</strong> ist, werden hier so wenig Daten wie möglich verarbeitet.
+    </p>
+
+    <!-- 1. Keine eigene Datenerhebung -->
+    <h2 class="text-xl font-semibold text-white mt-8 mb-3">1. Erhebung und Verarbeitung von Daten</h2>
+    <p class="mb-4">
+      Auf dieser Webseite werden vom Betreiber selbst <strong class="text-white">keinerlei personenbezogene Daten</strong> von Ihnen erhoben oder gespeichert. 
+    </p>
+    <ul class="list-disc list-inside space-y-2 mb-4 text-slate-400">
+      <li>Es gibt kein Kontaktformular und keine Kommentarfunktion.</li>
+      <li>Es werden keine Cookies gesetzt.</li>
+      <li>Es werden keine Tracking- oder Analysetools verwendet.</li>
+    </ul>
+
+    <!-- 2. Vercel Hosting & Logfiles -->
+    <h2 class="text-xl font-semibold text-white mt-8 mb-3">2. Hosting durch Vercel</h2>
+    <p class="mb-4">
+      Diese Website wird bei dem Cloud-Dienstleister <strong class="text-white">Vercel Inc.</strong> (340 S Lemon Ave #4133, Walnut, CA 91789, USA) gehostet. 
+    </p>
+    <p class="mb-4">
+      Beim Aufruf dieser Seiten verarbeitet Vercel automatisch technisch notwendige Daten in sogenannten Server-Logfiles, um die Stabilität und Sicherheit der Webseite zu gewährleisten. Dazu gehören:
+    </p>
+    <ul class="list-disc list-inside space-y-1 mb-4 text-slate-400">
+      <li>Ihre IP-Adresse (wird zur Bereitstellung der Seite benötigt)</li>
+      <li>Datum und Uhrzeit der Serveranfrage</li>
+      <li>Browsertyp, Version und genutztes Betriebssystem</li>
+      <li>Referrer-URL (die zuvor besuchte Seite)</li>
+    </ul>
+    <p class="mb-4">
+      Die Rechtsgrundlage für diese Verarbeitung ist das berechtigte Interesse an einem sicheren und performanten Betrieb der Website (Art. 6 Abs. 1 lit. f DSGVO). Vercel ist unter dem EU-U.S. Data Privacy Framework zertifiziert, wodurch ein angemessenes Datenschutzniveau gewährleistet ist. Weitere Details finden Sie in der <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Vercel Datenschutzerklärung</a>.
+    </p>
+
+    <!-- 3. Externe Links -->
+    <h2 class="text-xl font-semibold text-white mt-8 mb-3">3. Externe Links</h2>
+    <p class="mb-4">
+      Diese Webseite enthält Verlinkungen zu externen Plattformen (z. B. GitHub, Telegram). 
+      Sobald Sie auf einen dieser Links klicken, verlassen Sie diese Webseite. Ab diesem Zeitpunkt gelten die 
+      Datenschutzbestimmungen der jeweiligen externen Plattform. Ich habe keinen Einfluss darauf, wie diese Anbieter 
+      Ihre Daten verarbeiten.
+    </p>
+  </div>
+</Layout>
